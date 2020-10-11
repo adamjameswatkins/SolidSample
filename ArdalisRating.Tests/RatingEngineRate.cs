@@ -9,11 +9,13 @@ namespace ArdalisRating.Tests
     {
         private RatingEngine engine;
         private FakeLogger logger;
+        private FakePolicySource policySource;
 
         public RatingEngineRate()
         {
             this.logger = new FakeLogger();
-            this.engine = new RatingEngine(this.logger);
+            this.policySource = new FakePolicySource();
+            this.engine = new RatingEngine(this.logger, this.policySource);
         }
 
         [Fact]
@@ -26,7 +28,7 @@ namespace ArdalisRating.Tests
                 Valuation = 200000
             };
             string json = JsonConvert.SerializeObject(policy);
-            File.WriteAllText("policy.json", json);
+            this.policySource.PolicyString = json;
 
             this.engine.Rate();
             var result = engine.Rating;
@@ -44,7 +46,7 @@ namespace ArdalisRating.Tests
                 Valuation = 260000
             };
             string json = JsonConvert.SerializeObject(policy);
-            File.WriteAllText("policy.json", json);
+            this.policySource.PolicyString = json;
 
             this.engine.Rate();
             var result = engine.Rating;
@@ -62,7 +64,7 @@ namespace ArdalisRating.Tests
                 Valuation = 260000
             };
             string json = JsonConvert.SerializeObject(policy);
-            File.WriteAllText("policy.json", json);
+            this.policySource.PolicyString = json;
 
             this.engine.Rate();
             var result = engine.Rating;

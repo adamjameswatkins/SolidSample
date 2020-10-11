@@ -6,6 +6,13 @@ namespace ArdalisRating
     {
         public RatingEngine Engine { get; set; }
 
+        private readonly IPolicySource policySource;
+
+        public DefaultRatingContext(IPolicySource policySource)
+        {
+            this.policySource = policySource;
+        }
+
         public Rater CreateRaterForPolicy(Policy policy, IRatingContext context)
         {
             return new RaterFactory().Create(policy, context);
@@ -23,7 +30,7 @@ namespace ArdalisRating
 
         public string LoadPolicyFromFile()
         {
-            return new FilePolicySource().GetPolicyFromSource();
+            return this.policySource.GetPolicyFromSource();
         }
 
         public string LoadPolicyFromURI(string uri)

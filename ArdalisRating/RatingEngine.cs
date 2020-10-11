@@ -7,14 +7,17 @@
     public class RatingEngine
     {
         private readonly ILogger logger;
+        private readonly IPolicySource policySource;
 
-        public IRatingContext Context { get; set; } = new DefaultRatingContext();
+        public IRatingContext Context { get; set; }
         public decimal Rating { get; set; }
         
-        public RatingEngine(ILogger logger)
+        public RatingEngine(ILogger logger, IPolicySource policySource)
         {
-            Context.Engine = this;
             this.logger = logger;
+            this.policySource = policySource;
+            this.Context = new DefaultRatingContext(this.policySource);
+            Context.Engine = this;
         }
 
         public void Rate()

@@ -36,7 +36,7 @@
 
             var rater = this.raterFactory.Create(policy);
 
-            rater.Rate(policy);
+            this.Rating = rater.Rate(policy);
 
             this.logger.Log("Rating completed.");
         }

@@ -13,15 +13,6 @@ namespace ArdalisRating.Tests
         }
     }
 
-    public class FakeRatingUpdater : IRatingUpdater
-    {
-        public decimal? NewRating { get; private set; }
-        public void UpdateRating(decimal rating)
-        {
-            NewRating = rating;
-        }
-    }
-
     public class AutoPolicyRaterRate
     {
         [Fact]
@@ -51,14 +42,13 @@ namespace ArdalisRating.Tests
                 Deductible = 250m
             };
             var logger = new FakeLogger();
-            var ratingUpdater = new FakeRatingUpdater();
             var rater = new AutoPolicyRater(logger);
 
             //When
-            rater.Rate(policy);
+            var result = rater.Rate(policy);
 
             //Then
-            Assert.Equal(1000m, ratingUpdater.NewRating.Value);
+            Assert.Equal(1000m, result);
         }
     }
 }

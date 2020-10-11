@@ -17,11 +17,6 @@
             this.logger = logger;
         }
 
-        public RatingEngine() : this(new ConsoleLogger())
-        {
-            
-        }
-
         public void Rate()
         {
             this.logger.Log("Starting rate.");

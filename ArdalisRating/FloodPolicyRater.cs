@@ -2,8 +2,8 @@ namespace ArdalisRating
 {
     public class FloodPolicyRater : Rater
     {
-        public FloodPolicyRater(IRatingContext context)
-            : base(context)
+        public FloodPolicyRater(IRatingUpdater ratingUpdater)
+            : base(ratingUpdater)
         {
         }
 

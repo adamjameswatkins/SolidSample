@@ -2,8 +2,8 @@ namespace ArdalisRating
 {
     public class LandPolicyRater : Rater
     {
-        public LandPolicyRater(IRatingContext context)
-            :base(context)
+        public LandPolicyRater(IRatingUpdater ratingUpdater)
+            :base(ratingUpdater)
         {
         }
 

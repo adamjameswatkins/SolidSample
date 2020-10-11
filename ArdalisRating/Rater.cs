@@ -5,9 +5,9 @@ namespace ArdalisRating
         protected readonly IRatingUpdater ratingUpdater;
         public ILogger Logger {get; set;} = new ConsoleLogger();
 
-        public Rater(IRatingContext context)
+        public Rater(IRatingUpdater ratingUpdater)
         {
-            this.ratingUpdater = context;
+            this.ratingUpdater = ratingUpdater;
         }
 
         public abstract void Rate(Policy policy);

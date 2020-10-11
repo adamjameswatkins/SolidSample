@@ -4,8 +4,8 @@ namespace ArdalisRating
 {
     public class AutoPolicyRater : Rater
     {
-        public AutoPolicyRater(IRatingContext context)
-            : base(context)
+        public AutoPolicyRater(IRatingUpdater ratingUpdater)
+            : base(ratingUpdater)
         {
         }
 

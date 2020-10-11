@@ -11,11 +11,11 @@ namespace ArdalisRating
 
         public override void Rate(Policy policy)
         {
-            this.logger.Log("Rating AUTO policy...");
-            this.logger.Log("Validating policy.");
+            this.Logger.Log("Rating AUTO policy...");
+            this.Logger.Log("Validating policy.");
             if (String.IsNullOrEmpty(policy.Make))
             {
-                this.logger.Log("Auto policy must specify Make");
+                this.Logger.Log("Auto policy must specify Make");
                 return;
             }
             if (policy.Make == "BMW")

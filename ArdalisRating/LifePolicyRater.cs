@@ -11,21 +11,21 @@ namespace ArdalisRating
 
         public override void Rate(Policy policy)
         {
-            this.logger.Log("Rating LIFE policy...");
-            this.logger.Log("Validating policy.");
+            this.Logger.Log("Rating LIFE policy...");
+            this.Logger.Log("Validating policy.");
             if (policy.DateOfBirth == DateTime.MinValue)
             {
-                this.logger.Log("Life policy must include Date of Birth.");
+                this.Logger.Log("Life policy must include Date of Birth.");
                 return;
             }
             if (policy.DateOfBirth < DateTime.Today.AddYears(-100))
             {
-                this.logger.Log("Centenarians are not eligible for coverage.");
+                this.Logger.Log("Centenarians are not eligible for coverage.");
                 return;
             }
             if (policy.Amount == 0)
             {
-                this.logger.Log("Life policy must include an Amount.");
+                this.Logger.Log("Life policy must include an Amount.");
                 return;
             }
             int age = DateTime.Today.Year - policy.DateOfBirth.Year;

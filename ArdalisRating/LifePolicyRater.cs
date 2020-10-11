@@ -2,7 +2,7 @@ using System;
 
 namespace ArdalisRating
 {
-    public class LifePolicyRater
+    public class LifePolicyRater : Rater
     {
         private readonly RatingEngine engine;
         private readonly ConsoleLogger logger;
@@ -13,7 +13,7 @@ namespace ArdalisRating
             this.logger = logger;
         }
 
-        public void Rate(Policy policy)
+        public override void Rate(Policy policy)
         {
             this.logger.Log("Rating LIFE policy...");
             this.logger.Log("Validating policy.");

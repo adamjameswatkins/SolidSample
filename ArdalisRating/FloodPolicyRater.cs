@@ -1,16 +1,10 @@
-using System;
-
 namespace ArdalisRating
 {
     public class FloodPolicyRater : Rater
     {
-        private readonly RatingEngine engine;
-        private readonly ConsoleLogger logger;
-
-        public FloodPolicyRater(RatingEngine engine, ConsoleLogger logger)
+        public FloodPolicyRater(IRatingContext context)
+            : base(context)
         {
-            this.engine = engine;
-            this.logger = logger;
         }
 
         public override void Rate(Policy policy)
@@ -45,7 +39,7 @@ namespace ArdalisRating
             {
                 multiple = 1.1m;
             }
-            this.engine.Rating = policy.BondAmount * 0.05m * multiple;
+            this.context.UpdateRating(policy.BondAmount * 0.05m * multiple);
         }
     }
 }

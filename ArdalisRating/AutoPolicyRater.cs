@@ -4,13 +4,9 @@ namespace ArdalisRating
 {
     public class AutoPolicyRater : Rater
     {
-        private readonly RatingEngine engine;
-        private readonly ConsoleLogger logger;
-
-        public AutoPolicyRater(RatingEngine engine, ConsoleLogger logger)
+        public AutoPolicyRater(IRatingContext context)
+            : base(context)
         {
-            this.engine = engine;
-            this.logger = logger;
         }
 
         public override void Rate(Policy policy)
@@ -26,9 +22,9 @@ namespace ArdalisRating
             {
                 if (policy.Deductible < 500)
                 {
-                    this.engine.Rating = 1000m;
+                    this.context.UpdateRating(900m);
                 }
-                this.engine.Rating = 900m;
+                this.context.UpdateRating(900m);
             }
         }
     }

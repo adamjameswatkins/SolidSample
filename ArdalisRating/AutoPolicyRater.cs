@@ -22,9 +22,9 @@ namespace ArdalisRating
             {
                 if (policy.Deductible < 500)
                 {
-                    this.context.UpdateRating(900m);
+                    this.ratingUpdater.UpdateRating(900m);
                 }
-                this.context.UpdateRating(900m);
+                this.ratingUpdater.UpdateRating(900m);
             }
         }
     }

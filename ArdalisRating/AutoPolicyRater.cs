@@ -22,7 +22,8 @@ namespace ArdalisRating
             {
                 if (policy.Deductible < 500)
                 {
-                    this.ratingUpdater.UpdateRating(900m);
+                    this.ratingUpdater.UpdateRating(1000m);
+                    return;
                 }
                 this.ratingUpdater.UpdateRating(900m);
             }

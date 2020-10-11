@@ -15,7 +15,7 @@ namespace ArdalisRating
             }
             catch (System.Exception)
             {
-                return null;
+                return new UnknownPolicyRater(engine, engine.Logger);
             }
         }
     }

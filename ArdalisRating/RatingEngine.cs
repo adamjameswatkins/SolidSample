@@ -8,15 +8,17 @@
     {
         private readonly ILogger logger;
         private readonly IPolicySource policySource;
+        private readonly IPolicySerializer policySerializer;
 
         public IRatingContext Context { get; set; }
         public decimal Rating { get; set; }
         
-        public RatingEngine(ILogger logger, IPolicySource policySource)
+        public RatingEngine(ILogger logger, IPolicySource policySource, IPolicySerializer policySerializer)
         {
             this.logger = logger;
             this.policySource = policySource;
-            this.Context = new DefaultRatingContext(this.policySource);
+            this.policySerializer = policySerializer;
+            this.Context = new DefaultRatingContext(this.policySource, this.policySerializer);
             Context.Engine = this;
         }
 
@@ -26,9 +28,9 @@
 
             this.logger.Log("Loading policy.");
 
-            string policyJson = Context.LoadPolicyFromFile();
+            string policyString = Context.LoadPolicyFromFile();
 
-            var policy = Context.GetPolicyFromJsonString(policyJson);
+            var policy = this.policySerializer.GetPolicyFromString(policyString);
 
             var rater = Context.CreateRaterForPolicy(policy, Context);
 

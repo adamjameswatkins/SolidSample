@@ -11,13 +11,15 @@ namespace ArdalisRating.Tests
         private FakeLogger logger;
         private FakePolicySource policySource;
         private JsonPolicySerializer policySerializer;
+        private RaterFactory raterFactory;
 
         public RatingEngineRate()
         {
             this.logger = new FakeLogger();
             this.policySource = new FakePolicySource();
             this.policySerializer = new JsonPolicySerializer();
-            this.engine = new RatingEngine(this.logger, this.policySource, this.policySerializer);
+            this.raterFactory = new RaterFactory(this.logger);
+            this.engine = new RatingEngine(this.logger, this.policySource, this.policySerializer, this.raterFactory);
         }
 
         [Fact]

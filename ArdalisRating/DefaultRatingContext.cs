@@ -15,11 +15,6 @@ namespace ArdalisRating
             this.policySerializer = policySerializer;
         }
 
-        public Rater CreateRaterForPolicy(Policy policy, IRatingContext context)
-        {
-            return new RaterFactory().Create(policy, context);
-        }
-
         public Policy GetPolicyFromJsonString(string policyJson)
         {
             return this.policySerializer.GetPolicyFromString(policyJson);

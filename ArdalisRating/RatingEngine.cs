@@ -9,15 +9,17 @@
         private readonly ILogger logger;
         private readonly IPolicySource policySource;
         private readonly IPolicySerializer policySerializer;
+        private readonly RaterFactory raterFactory;
 
         public IRatingContext Context { get; set; }
         public decimal Rating { get; set; }
         
-        public RatingEngine(ILogger logger, IPolicySource policySource, IPolicySerializer policySerializer)
+        public RatingEngine(ILogger logger, IPolicySource policySource, IPolicySerializer policySerializer, RaterFactory raterFactory)
         {
             this.logger = logger;
             this.policySource = policySource;
             this.policySerializer = policySerializer;
+            this.raterFactory = raterFactory;
             this.Context = new DefaultRatingContext(this.policySource, this.policySerializer);
             Context.Engine = this;
         }
@@ -32,7 +34,7 @@
 
             var policy = this.policySerializer.GetPolicyFromString(policyString);
 
-            var rater = Context.CreateRaterForPolicy(policy, Context);
+            var rater = this.raterFactory.Create(policy);
 
             rater.Rate(policy);
 
